@@ -30,8 +30,9 @@ class World(renderer : SystemRenderer, ship : Ship) {
   val loop = DefineLoop {
     if (right.isDown) ship.sprite.rotation += Vector2.DEG_TO_RADS*3
     if (left.isDown) ship.sprite.rotation -= Vector2.DEG_TO_RADS*3
-    if (up.isDown) ship.acceleration = ship.heading()
-    if (down.isDown) ship.acceleration = Vector2.Zero
+    if (up.isDown) ship.acceleration = ship.heading() * 0.8
+    else if (down.isDown) ship.acceleration = ship.heading() * -0.4
+    else ship.acceleration = Vector2.Zero
     if (space.isDown) ship.fire(this)
     updateAllChildren()
     renderer.render(stage)
