@@ -18,6 +18,28 @@ case class Vector2(var x : Double, var y : Double) {
   def magnitude = Math.sqrt(x*x+y*y)
   def normalized = this / magnitude
 
+  def limit (limit:Double) : Vector2 = {
+    return limit2(limit * limit)
+  }
+
+  def limit2 (limit2:Double) : Vector2 = {
+    if (sqrMagnitude > limit2) {
+      return scale(Math.sqrt(limit2 / len2))
+    }
+    return this;
+  }
+
+  def scale ( scalar: Double) : Vector2  ={
+    x *= scalar
+    y *= scalar
+    return this
+  }
+
+
+  def len2 ():Double = {
+    return x * x + y * y
+  }
+
   def rotate(degrees: Double) : Vector2 = rotateRadians(degrees * Vector2.DEG_TO_RADS)
 
   def rotateRadians(radians: Double) : Vector2 = {
